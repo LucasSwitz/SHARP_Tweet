@@ -1,3 +1,5 @@
+package Exceptions;
+
 /**
  * Created by Switzer on 12/6/2015.
  */
@@ -7,5 +9,8 @@ public class InvalidTweetSyntaxException extends Exception {
     {
         super("Invalid Tweet Syntax at: "+badCharacter);
     }
-
+    public InvalidTweetSyntaxException(String message)
+    {
+        super(message);
+    }
 }

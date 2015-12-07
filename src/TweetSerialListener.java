@@ -1,4 +1,4 @@
-import edu.wpi.first.wpilibj.HLUsageReporting;
+import Exceptions.InvalidTweetSyntaxException;
 import edu.wpi.first.wpilibj.SerialPort;
 
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ public class TweetSerialListener{
     public TweetSerialListener()
     {
         serial = new SerialPort(9600, SerialPort.Port.kUSB);
+        commands = new HashMap<Character, ArrayList<Integer>>();
     }
 
 
@@ -38,7 +39,7 @@ public class TweetSerialListener{
 
     private void stringToCommandSet(String readData) throws InvalidTweetSyntaxException
     {
-        char currentFlag = '/';
+        char currentFlag = '\0';
         String currentValue = "";
         ArrayList<Integer> currentValues = new ArrayList<Integer>();
         for(int i = 0; i < readData.length(); i++)
@@ -47,7 +48,6 @@ public class TweetSerialListener{
             switch (currentChar)
             {
                 case '(':
-                    currentFlag = '/';
                     currentValue = "";
                     currentValues.clear();
                     break;
@@ -81,7 +81,6 @@ public class TweetSerialListener{
     }
     boolean commandSetAvailable()
     {
-
         return commands != null;
     }
 

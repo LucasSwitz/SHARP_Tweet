@@ -17,7 +17,7 @@ public abstract class SHARPTweetCommandGroupRunnable extends SHARPTweetCommandGr
         listener.read();
 
         if (listener.commandSetAvailable()) {
-            this.commands = listener.getCommandSet();
+            this.incomingCommands = listener.getCommandSet();
         }
     }
 }
