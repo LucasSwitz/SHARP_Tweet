@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Switzer on 12/6/2015.
  */
-public abstract class SHARPTweetCommandGroup {
+public abstract class SHARPTweetCommandGroup extends CommandGroup {
 
     protected HashMap<Character, ArrayList<Integer>> incomingCommands;
     protected HashMap<Character, CommandClassArg> switchDefenitions;
@@ -30,7 +30,7 @@ public abstract class SHARPTweetCommandGroup {
 
     public void addCommand(Command command)
     {
-        commands.addSequential(command);
+        addSequential(command);
     }
 
     public void loadInstructions() throws NullPointerException
@@ -129,8 +129,10 @@ public abstract class SHARPTweetCommandGroup {
         //listener reads from serial and then update the currentCommandSet
         listener.read();
 
-        if(listener.commandSetAvailable())
+        if(listener.commandSetAvailable()) {
             incomingCommands = listener.getCommandSet();
+            loadInstructions();
+        }
     }
 
     public void update()
